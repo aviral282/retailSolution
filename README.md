@@ -1,27 +1,24 @@
 # RetailSolutions
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
-
 ## Development server
-
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
 ## Build
-
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Problem Statement
+The HR  department needs to track employee work hours and in particular the break times the employee is entitled to. There are different employee positions and work times
+All Employees are entitled to 
+•	10mins break per hour worked
+•	For every 4 hours they get an additional 10min break
+Managers are entitled to
+•	15mins break per hour worked
+ Nightshift workers are entitled to
+•	For every 2 hours they get an additional 10min break 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Produce a system in a language and technology of your choosing but preferably .NET. What the system should do:
+•	Allow employee work hours to be entered
+•	Display a report of the hours worked along with the break times they are entitled to
+•	There is no need to have a Database
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

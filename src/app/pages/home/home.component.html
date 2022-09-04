@@ -1,0 +1,137 @@
+<div class="container">
+  <h1> Retails Solutions </h1>
+  <p>This app takes the number of hours worked by employee and calculate the break times they are entitled to in minutes
+  </p>
+  <p> In takes inputs the name, number of work hours and Type of employee</p>
+  <img src="../../../assets/images/2.svg" class="rounded mx-auto d-block" width="30%" alt="Timetable">
+
+  <form class="mt-4" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <table class="table table-bordered" formArrayName="employees">
+      <tr class="form-group">
+        <th colspan="2">Add Employee Details</th>
+        <th width="150px"><button type="button" (click)="addEmployee()" class="btn btn-primary">Add More</button></th>
+        <th width="150px">Action</th>
+      </tr>
+      <tr *ngFor="let quantity of employees().controls; let i=index" [formGroupName]="i">
+
+        <!-- <td class="form-group has-validation">
+          Name :
+          <input type="text" formControlName="name" class="form-control" required>
+          <div class="invalid-feedback">
+            Name is required.
+          </div>
+        </td> -->
+
+        <td class="form-group mb-3 col-md-4">
+          <label class="col-form-label">
+            Name
+          </label>
+          <small class="float-right mt-2 text-danger">* Required</small>
+          <div class="input-group input-group-alternative">
+            <input type="text" formControlName="name" class="form-control" placeholder="Martin henry" required>
+          </div>
+          <div class="invalid-feedback d-block" *ngIf="submitted && g.name.errors">
+            <i class="fas fa-exclamation-triangle"></i> &nbsp;
+            Name is required
+          </div>
+        </td>
+
+
+        <td class="form-group mb-3 col-md-4">
+          <label class="col-form-label">
+            Employee Type :
+          </label>
+          <small class="float-right mt-2 text-danger">* Required</small>
+          <div class="input-group input-group-alternative">
+            <select name="cars" id="type" formControlName="type" class="form-control" required>
+              <option value="employee">Employee</option>
+              <option value="manager">Manager</option>
+              <option value="nightshiftworker">Night Shift</option>
+            </select>
+          </div>
+          <div class="invalid-feedback d-block" *ngIf="submitted && g.name.errors">
+            <i class="fas fa-exclamation-triangle"></i> &nbsp;
+            Selection is required
+          </div>
+        </td>
+
+
+        <!-- <td class="form-group">
+          Emplyee Type :
+          <select name="cars" id="type" formControlName="type" class="form-control" required>
+            <option value="employee">Employee</option>
+            <option value="manager">Manager</option>
+            <option value="nightshiftworker">Night Shift</option>
+          </select>
+        </td> -->
+
+        <!-- <td class="form-group">
+          Hours Worked:
+          <input type="number" formControlName="hoursWorked" class="form-control" required>
+        </td> -->
+
+        <td class="form-group mb-3 col-md-4">
+          <label class="col-form-label">
+            Hours Worked:
+          </label>
+          <small class="float-right mt-2 text-danger">* Required</small>
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+            </div>
+            <input type="number" formControlName="hoursWorked" class="form-control" required>
+
+          </div>
+          <div class="invalid-feedback d-block" *ngIf="submitted && g.name.errors">
+            <i class="fas fa-exclamation-triangle"></i> &nbsp;
+            Selection is required
+          </div>
+        </td>
+
+        <td>
+          <button (click)="removeEmployee(i)" class="btn btn-danger">Remove</button>
+        </td>
+      </tr>
+    </table>
+
+    <button type="submit" class="btn btn-success btn-block">Submit</button>
+
+  </form>
+
+  <div class="card mt-4" *ngIf="block">
+    <h5 class="card-header">Results</h5>
+    <div *ngIf="results">
+      <div class="card-body">
+        <h5 class="card-title">Employees with their break time in minutes</h5>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Hours Worked</th>
+                <th scope="col">Break time (Minutes)</th>
+                <th scope="col">Break time (in hours)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let res of results;index as i">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{res.name}}</td>
+                <td>{{res.type}}</td>
+                <td>{{res.workHours}}</td>
+                <td>{{res.hoursWorked}} Minutes</td>
+                <td>{{res.hoursWorked / 60}} Hours </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>

@@ -22,3 +22,5 @@ Produce a system in a language and technology of your choosing but preferably .N
 •	Display a report of the hours worked along with the break times they are entitled to
 •	There is no need to have a Database
 
+# Solution also has the mobile app to run on android & iOS as a PWA, the website to this solution is hosted on the ip : http://139.59.191.216/
+# Android app package is insite folder android app package/ along with screenshots of app working on emulator in android studio

@@ -21,8 +21,7 @@ export class HomeComponent implements OnInit {
 
   results: employeeReslts[] = [];
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
-    this.addEmployee();
+    this.addEmployee();  // call once to initiate one field
   }
 
   employeeForm: FormGroup;
@@ -40,7 +39,7 @@ export class HomeComponent implements OnInit {
     return this.employeeForm.get("employees") as FormArray
   }
 
-  get g() { return this.employeeForm.controls; }
+  get g() { return this.employeeForm.controls; }   // Easy to grab in html
 
 
   newEmployee(): FormGroup {
@@ -51,28 +50,25 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  addEmployee() {
+  addEmployee() { // add in dynamic input
     this.employees().push(this.newEmployee());
   }
 
-  removeEmployee(i: number) {
+  removeEmployee(i: number) {  // Remove from dynamic input
     this.employees().removeAt(i);
   }
 
   onSubmit() {
     this.results = [];
     this.block = false;
-    // this.submitted = true;
 
-
-    console.log(this.employeeForm.value.employees);
     let empArr: [] = this.employeeForm.value.employees;
     empArr.forEach(i => {
-      console.log('i', i);
       switch (i['type']) {
         case "manager":
           // 15mins break per hour worked
-          let manager = this.userService.getUserType('manager');
+          let manager = this.userService.getUserType('manager'); // Get user from service & popluate the add values
+          // Can add a boolean to service in future for extrahours as it is not present for manager
           let timeoffMinurePerHour = Math.floor(i['hoursWorked'] * manager.breakTime);
           let q: employeeReslts = {
             name: i['name'],
@@ -81,16 +77,12 @@ export class HomeComponent implements OnInit {
             hoursWorked: timeoffMinurePerHour
           }
           this.results.push(q);
-          console.table({
-            'name': i['name'],
-            'Total Time off': timeoffMinurePerHour,
-          })
           break;
 
         case "employee":
           //10mins break per hour worked
           //For every 4 hours they get an additional 10min break
-          let employee = this.userService.getUserType('employee');
+          let employee = this.userService.getUserType('employee'); // Get user from service & popluate the add values
 
           let timeoffMinurePerHourEmp = Math.floor(i['hoursWorked'] * employee.breakTime);
           let extra4Hours = Math.floor((i['hoursWorked'] / employee.additionalBreakTimeHours) * 10)
@@ -103,16 +95,11 @@ export class HomeComponent implements OnInit {
             hoursWorked: totalTime
           }
           this.results.push(emp);
-          console.table({
-            'name': i['name'],
-            'Total Time off': totalTime,
-          })
           break;
 
         case "nightshiftworker":
           //For every 2 hours they get an additional 10min break 
-          let nightShiftWork = this.userService.getUserType('nightshift');
-
+          let nightShiftWork = this.userService.getUserType('nightshift');  // Get user from service & popluate the add values
 
           let timeoffMinurePerHourNight = Math.floor(i['hoursWorked'] * nightShiftWork.breakTime);
           let extra2Hours = Math.floor((i['hoursWorked'] / nightShiftWork.additionalBreakTimeHours) * 10)
@@ -125,21 +112,14 @@ export class HomeComponent implements OnInit {
             hoursWorked: totalTimeEmp
           }
           this.results.push(nightShift);
-
-          console.table({
-            'name': i['name'],
-            'Total Time off': totalTimeEmp,
-          })
           break;
 
         default:
-          // 
-
+          console.log('not recognized !');
           break;
       }
     });
     this.block = true;
-    console.log('this.results allarr', this.results);
-  }
 
+  }
 }
